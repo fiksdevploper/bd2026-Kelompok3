@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = mysqli_real_escape_string($link, $_POST['username']);
     $password = $_POST['password'];
 
-    $query  = "SELECT * FROM admin WHERE username = '$username'";
+    $query  = "SELECT * FROM tbl_admin WHERE username = '$username'";
     $result = mysqli_query($link, $query);
 
     if (mysqli_num_rows($result) === 1) {

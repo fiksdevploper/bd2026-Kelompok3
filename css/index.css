@@ -236,53 +236,56 @@ body {
 
 /* Pengaturan area Sidebar-content secara keseluruhan */
 .sidebar-content {
-    padding: 10px;
+    width: 250px;
+    background-color: #ffffff;
+    padding: 20px;
+    font-family: sans-serif;
 }
-
-/* Membuat garis bawah estetik pada judul MENU UTAMA */
 .sidebar-content h3 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1e5a75;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #5bc0de; /* Garis biru di bawah judul */
+    font-size: 11px;
+    color: #9ca3af;
+    letter-spacing: 0.1em;
     margin-bottom: 15px;
-    letter-spacing: 0.5px;
+    padding-left: 10px;
 }
-
-/* Menghilangkan bullet points bawaan HTML (titik-titik hitam) */
 .sidebar-content ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
-/* Mengatur jarak antar menu agar tidak terlalu mepet */
-.sidebar-content ul li {
-    margin-bottom: 18px;
-}
-
-/* Mengatur gaya teks link menu utama */
-.sidebar-content ul li a {
+.sidebar-content li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    color: #4b5563;
     text-decoration: none;
-    color: #333333;
     font-weight: 500;
-    font-size: 15px;
-    transition: color 0.2s ease;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
-
-/* Efek ketika kursor mouse mendekati menu (Hover) */
-.sidebar-content ul li a:hover {
-    color: #5bc0de;
+.sidebar-content li a:hover {
+    background-color: #f3f4f6;
+    color: #111827;
 }
-
-/* Gaya khusus untuk tombol Keluar / Logout agar terlihat membedakan diri */
-.sidebar-content ul li.logout-item a {
-    color: #a94442; /* Warna merah gelap yang elegan untuk logout */
-    font-weight: 500;
+.sidebar-content .icon {
+    width: 20px;
+    height: 20px;
+    color: #6b7280;
 }
-
-.sidebar-content ul li.logout-item a:hover {
-    color: #d9534f; /* Merah terang saat di-hover */
-    text-decoration: underline;
+/* Style Khusus Logout */
+.sidebar-content .logout-item {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f3f4f6;
+}
+.sidebar-content .logout-item a {
+    color: #dc2626;
+}
+.sidebar-content .logout-item a:hover {
+    background-color: #fef2f2;
+    color: #991b1b;
+}
+.sidebar-content .logout-item .icon {
+    color: #ef4444;
 }
