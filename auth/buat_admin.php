@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // PERBAIKAN: Mengubah $koneksi menjadi $link, dan target tabel ke 'admin'
-    $query  = "SELECT * FROM admin WHERE username = '$username'";
+    $query  = "SELECT * FROM tbl_admin WHERE username = '$username'";
     $result = mysqli_query($link, $query);
 
     if (mysqli_num_rows($result) === 1) {

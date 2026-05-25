@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="/BD2026-KELOMPOK3/css/index.css">
 </head>
 
 <body>
@@ -12,7 +12,7 @@
         <h3>MENU UTAMA</h3>
         <ul>
             <li>
-                <a href="/bd2026/index.php">
+                <a href="/BD2026-KELOMPOK3/index.php">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a href="/bd2026/mahasiswa_dashboard/mahasiswa.php">
+                <a href="/BD2026-KELOMPOK3/mahasiswa_dashboard/mahasiswa.php">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li>
-                <a href="/bd2026/nilai_dashboard/nilai.php">
+                <a href="/BD2026-KELOMPOK3/nilai_dashboard/nilai.php">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -42,7 +42,7 @@
                 </a>
             </li>
             <li>
-                <a href="/bd2026/dosen_dashboard/dosen.php">
+                <a href="/BD2026-KELOMPOK3/dosen_dashboard/dosen.php">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -54,7 +54,7 @@
                 </a>
             </li>
             <li>
-                <a href="/bd2026/matakuliah_dashboard/mata_kuliah.php">
+                <a href="/BD2026-KELOMPOK3/matakuliah_dashboard/mata_kuliah.php">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -64,7 +64,7 @@
                 </a>
             </li>
             <li>
-                <a href="/bd2026/dopem_dashboard/dopem.php">
+                <a href="/BD2026-KELOMPOK3/dopem_dashboard/dopem.php">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -74,7 +74,7 @@
                 </a>
             </li>
             <li>
-                <a href="/bd2026/anggota_dashboard/anggota.php">
+                <a href="/BD2026-KELOMPOK3/anggota_dashboard/anggota.php">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -84,7 +84,7 @@
                 </a>
             </li>
             <li class="logout-item">
-                <a href="/bd2026/auth/logout.php">
+                <a href="/BD2026-KELOMPOK3/auth/logout.php">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
