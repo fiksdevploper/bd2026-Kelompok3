@@ -1,0 +1,199 @@
+/* css/crud.css */
+
+/* Container Tabel */
+.table-container {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eef2f5;
+}
+
+.table-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #1e5a75;
+}
+
+/* Styling Utama Tabel */
+.crud-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    text-align: left;
+}
+
+.crud-table th {
+    background-color: #f8f9fa;
+    color: #1e5a75;
+    font-weight: 600;
+    padding: 12px 15px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.crud-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eef2f5;
+    color: #444;
+}
+
+/* Efek baris saat kursor lewat */
+.crud-table tbody tr:hover {
+    background-color: #fcfdfe;
+}
+
+/* Komponen Tombol-Tombol */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Tombol Aksi (Ubah & Hapus) */
+.btn-action {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 13px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+.btn-edit {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.btn-edit:hover {
+    background-color: #ffe8a1;
+}
+
+.btn-delete {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.btn-delete:hover {
+    background-color: #f1b0b7;
+}
+
+/* Styling Khusus Form di crud.css */
+/* Kotak Form Utama Berdiri Sendiri */
+.form-box-full {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 12px;
+    border: 1px solid #eef2f5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    max-width: 800px; /* Batas lebar maksimal agar tidak terlalu melar di layar lebar */
+    margin: 20px 0;
+}
+
+/* Grup Input & Label */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+}
+
+/* Elemen Input Utama */
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: #333;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+/* Efek Glowing saat Input Fokus */
+.form-group input:focus {
+    background-color: #ffffff;
+    border-color: #1e5a75;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(30, 90, 117, 0.15);
+}
+
+/* Input Terkunci (NIM Pas Edit) */
+.form-group input:disabled {
+    background-color: #e2e8f0;
+    color: #64748b;
+    border-color: #cbd5e1;
+    cursor: not-allowed;
+}
+
+/* Area Tombol di Bawah Form */
+.form-actions {
+    display: flex;
+    justify-content: flex-start; /* Tombol sejajar di kiri */
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #edf2f7;
+}
+
+/* Tombol-Tombol */
+.btn-mhs {
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-mhs-submit {
+    background-color: #1e5a75;
+    color: white;
+}
+
+.btn-mhs-submit:hover {
+    background-color: #143e52;
+    transform: translateY(-1px);
+}
+
+.btn-mhs-cancel {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+.btn-mhs-cancel:hover {
+    background-color: #e2e8f0;
+    color: #1e293b;
+}

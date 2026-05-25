@@ -1,0 +1,203 @@
+/* Reset Dasar & Font */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Wrapper Utama (Split Screen) */
+.login-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 600px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin: 20px;
+}
+
+/* Sisi Kiri: Branding */
+.login-branding {
+    flex: 1;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.brand-logo {
+    max-width: 120px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.login-branding h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.login-branding p {
+    font-size: 0.95rem;
+    color: #e0f2fe;
+    line-height: 1.6;
+}
+
+/* Sisi Kanan: Form Container */
+.login-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 360px;
+}
+
+/* Header Form */
+.login-header {
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    color: #1e293b;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.login-header p {
+    color: #64748b;
+    font-size: 0.88rem;
+}
+
+/* Input Fields */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    color: #475569;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.password-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-wrapper-inner input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s ease;
+    color: #334155;
+}
+
+.input-wrapper-inner input:focus {
+    border-color: #0284c7;
+    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
+}
+
+/* Links & Checkbox */
+.forgot-link, .login-footer a {
+    color: #0284c7;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot-link:hover, .login-footer a:hover {
+    text-decoration: underline;
+}
+
+.form-options {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #64748b;
+    user-select: none;
+}
+
+.remember-me input {
+    accent-color: #0284c7;
+}
+
+/* Tombol Login */
+.btn-login {
+    background-color: #0284c7;
+    color: #ffffff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #0369a1;
+}
+
+/* Footer Form */
+.login-footer {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* Responsif (Layar HP/Tablet) */
+@media (max-width: 768px) {
+    .login-wrapper {
+        flex-direction: column;
+        max-width: 450px;
+    }
+    
+    .login-branding {
+        display: none; /* Sembunyikan panel biru di HP agar hemat ruang */
+    }
+    
+    .login-container {
+        padding: 35px 25px;
+    }
+}
