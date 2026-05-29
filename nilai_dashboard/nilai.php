@@ -25,6 +25,8 @@ global $link;
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/crud.css">
     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <style>
         /* CSS Tambahan Khusus untuk Menangani Tabel Data yang Padat */
         .table-responsive-wrapper {
@@ -36,7 +38,6 @@ global $link;
             border: 1px solid #e2e8f0;
         }
 
-        /* Optimasi ukuran font dan padding agar tidak memakan banyak ruang */
         .crud-table-compact {
             width: 100%;
             border-collapse: collapse;
@@ -65,7 +66,7 @@ global $link;
             background-color: #f1f5f9;
         }
 
-        /* Badge Status Kelulusan yang Lebih Intuitif & Profesional */
+        /* Badge Status Kelulusan */
         .badge-status {
             display: inline-block;
             padding: 6px 12px;
@@ -77,13 +78,11 @@ global $link;
             white-space: nowrap;
         }
         
-        /* WARNA BARU: Mengganti warna merah salah sasaran kemarin */
         .status-sangat-memuaskan { background-color: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; } /* Biru Sky */
         .status-memuaskan { background-color: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }        /* Hijau Emerald */
         .status-lulus-biasa { background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }       /* Hijau Mint */
-        .status-gagal { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }             /* Merah Pastel (Khusus Gagal) */
+        .status-gagal { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }             /* Merah Pastel */
         
-        /* Merapikan format teks komponen tugas */
         .text-muted-small {
             color: #64748b;
             font-size: 0.78rem;
@@ -96,14 +95,12 @@ global $link;
 <body>
     <header class="header-site">
         <img src="../images/logo.png" alt="Logo BEM FILKOM" class="navbar-logo">
-
         <div class="header-content">
             <?php include "../layouts/atas.php"; ?>
         </div>
     </header>
 
     <div class="main-container">
-
         <aside class="sidebar-site">
             <?php include "../layouts/menu_kiri.php"; ?>
         </aside>
@@ -145,11 +142,8 @@ global $link;
 
                             if ($result && mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    
-                                    // Saring teks menjadi huruf besar untuk akurasi logika pengecekan
                                     $status_text = strtoupper($row['status']);
                                     
-                                    // Penentuan warna dinamis berbasis kata kunci status
                                     if (strpos($status_text, 'SANGAT MEMUASKAN') !== false) {
                                         $badge_class = 'status-sangat-memuaskan';
                                     } elseif (strpos($status_text, 'MEMUASKAN') !== false) {
@@ -157,7 +151,7 @@ global $link;
                                     } elseif ($status_text == 'LULUS' || strpos($status_text, 'MEMENUHI') !== false) {
                                         $badge_class = 'status-lulus-biasa';
                                     } else {
-                                        $badge_class = 'status-gagal'; // Tetap merah jika benar-benar gagal
+                                        $badge_class = 'status-gagal';
                                     }
                             ?>
                             <tr>
@@ -181,8 +175,10 @@ global $link;
                                         Ubah
                                     </a>
                                     <a href="nilai_hapus.php?nim=<?= urlencode($row['nim']); ?>" 
-                                       onclick="return confirm('Yakin ingin menghapus data nilai NIM <?= htmlspecialchars($row['nim']); ?>?')" 
-                                       class="btn-action btn-delete" style="padding: 5px 10px; font-size: 0.8rem;">
+                                       data-nim="<?= htmlspecialchars($row['nim']); ?>"
+                                       data-nama="<?= htmlspecialchars($row['namamhs']); ?>"
+                                       class="btn-action btn-delete btn-hapus-nilai" 
+                                       style="padding: 5px 10px; font-size: 0.8rem;">
                                         Hapus
                                     </a>
                                 </td>
@@ -209,6 +205,42 @@ global $link;
     <footer class="footer-site">
         <?php include "../layouts/bawah.php"; ?>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Menangkap semua tombol hapus dengan class '.btn-hapus-nilai'
+            const tombolHapus = document.querySelectorAll('.btn-hapus-nilai');
+            
+            tombolHapus.forEach(tombol => {
+                tombol.addEventListener('click', function (event) {
+                    // Menghentikan aksi link href default bawaan browser
+                    event.preventDefault();
+                    
+                    const urlTujuan = this.getAttribute('href');
+                    const nimMhs = this.getAttribute('data-nim');
+                    const namaMhs = this.getAttribute('data-nama');
+                    
+                    // Memunculkan pop-up konfirmasi gaya profesional
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: `Data nilai milik ${namaMhs} (${nimMhs}) akan dihapus permanen dari sistem!`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#64748b',
+                        confirmButtonText: 'Ya, Hapus Data!',
+                        cancelButtonText: 'Batal',
+                        reverseButtons: true
+                    }).then((result) => {
+                        // Jika admin menekan tombol konfirmasi berwarna merah, jalankan penghapusan
+                        if (result.isConfirmed) {
+                            window.location.href = urlTujuan;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

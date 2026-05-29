@@ -27,11 +27,57 @@ if (isset($_GET['action']) && $_GET['action'] == 'confirm') {
     <style>
         body { 
             font-family: 'Poppins', sans-serif; 
-            background-color: #f4f6f9;
+            background-color: #f1f5f9; /* Menyamakan background dashboard */
         }
-        .custom-popup { border-radius: 20px !important; padding: 2rem !important; }
-        .custom-title { font-weight: 600 !important; color: #2d3748 !important; }
-        .custom-btn { padding: 12px 25px !important; font-weight: 500 !important; border-radius: 10px !important; }
+        
+        /* Kustomisasi Wrapper Utama SweetAlert2 */
+        .custom-popup { 
+            border-radius: 16px !important; 
+            padding: 2rem !important;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+        }
+        
+        /* Kustomisasi Teks Judul */
+        .custom-title { 
+            font-size: 1.4rem !important;
+            font-weight: 600 !important; 
+            color: #1e293b !important; 
+            padding-top: 10px !important;
+        }
+
+        /* Kustomisasi Teks Deskripsi */
+        .custom-html-content {
+            color: #64748b !important;
+            font-size: 0.95rem !important;
+            margin-top: 8px !important;
+        }
+        
+        /* Overriding style tombol bawaan agar serasi dengan crud.css */
+        .custom-confirm-btn {
+            padding: 10px 24px !important;
+            font-weight: 500 !important;
+            font-size: 0.9rem !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            transition: all 0.2s ease;
+        }
+        
+        .custom-cancel-btn {
+            padding: 10px 24px !important;
+            font-weight: 500 !important;
+            font-size: 0.9rem !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            transition: all 0.2s ease;
+        }
+
+        .custom-confirm-btn:hover {
+            opacity: 0.9;
+        }
+
+        .custom-cancel-btn:hover {
+            background-color: #475569 !important; /* Efek hover abu-abu lebih gelap */
+        }
     </style>
 </head>
 <body>
@@ -39,36 +85,37 @@ if (isset($_GET['action']) && $_GET['action'] == 'confirm') {
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: 'Anda akan keluar dari sesi aplikasi saat ini.',
-                icon: 'question',
-                iconColor: '#3182ce',
+                title: 'Konfirmasi Keluar Sesi',
+                html: 'Apakah Anda yakin ingin meninggalkan aplikasi? <br><span style="font-size: 0.85rem; color: #94a3b8;">Anda harus login kembali untuk mengakses dasbor.</span>',
+                icon: 'warning', /* Mengubah ikon ke warning (segitiga eksklamasi) karena sifatnya memutus sesi */
+                iconColor: '#f59e0b', /* Warna amber/oranye hangat yang lebih profesional daripada biru default */
                 showCancelButton: true,
-                confirmButtonColor: '#e53e3e',
-                cancelButtonColor: '#718096',
+                confirmButtonColor: '#ef4444', /* Merah modern (Tailwind Red 500) */
+                cancelButtonColor: '#64748b',  /* Abu-abu slate yang seimbang (Tailwind Slate 500) */
                 confirmButtonText: 'Ya, Keluar!',
                 cancelButtonText: 'Batal',
                 reverseButtons: true,
-                allowOutsideClick: false, // User wajib memilih, tidak bisa klik sembarang tempat
+                allowOutsideClick: false, // User wajib berinteraksi dengan tombol
                 customClass: {
                     popup: 'custom-popup',
                     title: 'custom-title',
-                    confirmButton: 'custom-btn',
-                    cancelButton: 'custom-btn'
+                    htmlContainer: 'custom-html-content',
+                    confirmButton: 'custom-confirm-btn',
+                    cancelButton: 'custom-cancel-btn'
                 },
                 showClass: {
-                    popup: 'animate__animated animate__fadeInUp animate__faster'
+                    popup: 'animate__animated animate__zoomIn animate__faster' /* Efek zoom-in yang ringkas dan responsif */
                 },
                 hideClass: {
-                    popup: 'animate__animated animate__fadeOutDown animate__faster'
+                    popup: 'animate__animated animate__fadeOut animate__faster'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Jika klik YA, reload halaman ini lagi sambil membawa perintah hapus session (?action=confirm)
+                    // Jika klik YA, reload halaman ini kembali dengan parameter konfirmasi
                     window.location.href = 'logout.php?action=confirm';
                 } else {
                     // Jika klik BATAL, kembalikan user ke halaman dashboard utama mahasiswa
-                    window.location.href = '../mahasiswa_dashboard/mahasiswa.php'; // Sesuaikan jalur folder Anda jika berbeda
+                    window.location.href = '../mahasiswa_dashboard/mahasiswa.php';
                 }
             });
         });
