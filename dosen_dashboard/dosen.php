@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Mahasiswa - FILKOM</title>
+    <title>Data Dosen - FILKOM</title>
 
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/crud.css">
@@ -29,7 +29,7 @@
             <div class="table-container">
                 <div class="table-header">
                     <h2>🎓 Data Dosen Fakultas Ilmu Komputer</h2>
-                    <a href="mahasiswa_tambah.php" class="btn btn-primary">+ Tambah Mahasiswa</a>
+                    <a href="dosen_tambah.php" class="btn btn-primary">+ Tambah Dosen</a>
                 </div>
 
                 <table class="crud-table">
@@ -43,16 +43,59 @@
                     </thead>
 
                     <tbody>
-                        <!-- data dan tombol crud -->
+
+                        <?php
+                        require_once '../koneksi.php';
+
+                        $query = "SELECT * FROM tbl_dosen ORDER BY nid ASC";
+                        $result = mysqli_query($link, $query);
+
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            $no = 1;
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo htmlspecialchars($row['nid']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['namados']); ?></td>
+
+                                    <td>
+                                        <a href="dosen_ubah.php?nid=<?php echo urlencode($row['nid']); ?>"
+                                            class="btn-action btn-edit">
+                                            Ubah
+                                        </a>
+
+                                        <a href="dosen_hapus.php?nid=<?php echo urlencode($row['nid']); ?>"
+                                            class="btn-action btn-delete"
+                                            onclick="return confirm('Yakin ingin menghapus data?')">
+                                            Hapus
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            <?php
+                            } // Akhir dari while
+                        } else {
+                            ?>
+
+                            <tr>
+                                <td colspan="4" style="text-align:center;">
+                                    Belum ada data dosen
+                                </td>
+                            </tr>
+
+                        <?php
+                        } // Akhir dari if 
+                        ?>
+
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
-
     <footer class="footer-site">
         <?php include "../layouts/bawah.php"; ?>
     </footer>
 </body>
-
 </html>
