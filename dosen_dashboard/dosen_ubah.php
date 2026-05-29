@@ -1,12 +1,19 @@
 <?php
 session_start();
 
+// Jika tidak ada session login atau nilainya bukan true, kunci halamannya
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
     header("Location: ../auth/login.php");
     exit;
 }
 
 require_once '../koneksi.php';
+include "../switch.php"; 
+
+global $link;
+
+$pesan_sukses = false;
+$pesan_gagal = false;
 
 // Ambil NID dari URL saat pertama kali halaman dimuat
 $nid = isset($_GET['nid']) ? mysqli_real_escape_string($link, $_GET['nid']) : '';
@@ -17,17 +24,15 @@ $data = mysqli_fetch_assoc($query);
 
 // Jika menekan tombol ubah
 if (isset($_POST['ubah'])) {
-    // PERBAIKAN 1: Ambil NID dari input hidden POST, bukan dari GET
     $nid_post = mysqli_real_escape_string($link, $_POST['nid']);
     $namados  = mysqli_real_escape_string($link, $_POST['namados']);
 
     $update_query = "UPDATE tbl_dosen SET namados='$namados' WHERE nid='$nid_post'";
     
     if (mysqli_query($link, $update_query)) {
-        header("Location: dosen.php");
-        exit;
+        $pesan_sukses = true;
     } else {
-        echo "Gagal mengupdate data: " . mysqli_error($link);
+        $pesan_gagal = "Gagal mengupdate data: " . mysqli_error($link);
     }
 }
 
@@ -42,44 +47,80 @@ if (!$data && !isset($_POST['ubah'])) {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Ubah Dosen</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubah Data Dosen - FILKOM</title>
+    
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/crud.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
+    <header class="header-site">
+        <img src="../images/logo.png" alt="Logo BEM FILKOM" class="navbar-logo">
+        <div class="header-content">
+            <?php include "../layouts/atas.php"; ?>
+        </div>
+    </header>
 
-<div class="table-container">
+    <div class="main-container">
+        
+        <aside class="sidebar-site">
+            <?php include "../layouts/menu_kiri.php"; ?>
+        </aside>
 
-    <div class="table-header">
-        <h2>Ubah Data Dosen</h2>
+        <main class="content-site">
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>👨‍🏫 Kelola Dosen / <span style="color: #64748b; font-weight: 400;">Ubah Data</span></h2>
+                </div>
+
+                <div class="form-box-full">
+                    <form action="" method="POST">
+                        
+                        <input type="hidden" name="nid" value="<?php echo htmlspecialchars($data['nid'] ?? $_POST['nid']); ?>">
+
+                        <div class="form-group">
+                            <label for="nid_view">NID (Nomor Induk Dosen)</label> 
+                            <input type="text" id="nid_view" value="<?php echo htmlspecialchars($data['nid'] ?? ''); ?>" readonly style="background-color: #e9ecef; color: #495057; cursor: not-allowed;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="namados">Nama Lengkap Dosen</label>
+                            <input type="text" id="namados" name="namados" value="<?php echo htmlspecialchars($data['namados'] ?? $_POST['namados'] ?? ''); ?>" required placeholder="Masukkan nama lengkap dosen...">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" name="ubah" class="btn-mhs btn-mhs-submit">Update Data Dosen</button>
+                            <a href="dosen.php" class="btn-mhs btn-mhs-cancel">Batal</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <form method="POST">
+    <?php if ($pesan_sukses): ?>
+        <script>
+            Swal.fire({
+                title: 'Berhasil!',
+                text: 'Data dosen berhasil diperbarui!',
+                icon: 'success',
+                confirmButtonColor: '#007bff'
+            }).then(() => { window.location.href = 'dosen.php'; });
+        </script>
+    <?php endif; ?>
 
-        <input type="hidden" name="nid" value="<?php echo htmlspecialchars($data['nid'] ?? $_POST['nid']); ?>">
-
-        <div class="form-group">
-            <label>NID</label> 
-            <input type="text" name="nid" value="<?php echo htmlspecialchars($data['nid']); ?>" readonly>
-        </div>
-
-        <div class="form-group">
-            <label>Nama Dosen</label>
-            <input type="text" name="namados" value="<?php echo htmlspecialchars($data['namados'] ?? $_POST['namados']); ?>" required>
-        </div>
-
-        <br>
-
-        <button type="submit" name="ubah" class="btn btn-primary">
-            Ubah
-        </button>
-        <a href="dosen.php" class="btn btn-secondary" style="text-decoration: none; margin-left: 10px;">Batal</a>
-
-    </form>
-
-</div>
-
+    <?php if ($pesan_gagal): ?>
+        <script>
+            Swal.fire({
+                title: 'Gagal!',
+                text: '<?php echo $pesan_gagal; ?>',
+                icon: 'error',
+                confirmButtonColor: '#d33'
+            });
+        </script>
+    <?php endif; ?>
 </body>
 </html>
