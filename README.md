@@ -40,7 +40,7 @@
 ## 📁 Struktur Folder
 
 ```
-bd2026/
+bd2026-Kelompok3/
 │
 ├── 📁 auth/                          # Sistem autentikasi
 │   ├── buat_admin.php                # Registrasi akun admin
