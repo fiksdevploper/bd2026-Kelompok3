@@ -40,6 +40,7 @@ $result = mysqli_query($link, $query);
 
 <body>
     <header class="header-site">
+        <img src="../images/logo.png" alt="Logo BEM FILKOM" class="navbar-logo">
         <div class="header-content">
             <?php include "../layouts/atas.php"; ?>
         </div>

@@ -25,7 +25,7 @@ if ($filter_sks != '') {
     $where .= " AND sks = " . (int) $filter_sks;
 }
 
-// PERBAIKAN: Nama tabel disesuaikan dengan 'tbl_matakuliah' sesuai database Anda
+// Nama tabel disesuaikan dengan 'tbl_matakuliah' sesuai database Anda
 $query = mysqli_query($link, "SELECT * FROM tbl_matakuliah $where ORDER BY kodemk ASC");
 $total = mysqli_num_rows($query);
 $stats = mysqli_fetch_assoc(mysqli_query($link, "SELECT COUNT(*) AS total, SUM(sks) AS total_sks FROM tbl_matakuliah"));
@@ -41,6 +41,8 @@ $stats = mysqli_fetch_assoc(mysqli_query($link, "SELECT COUNT(*) AS total, SUM(s
 
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/crud.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
         /* CSS Tambahan Khusus Penyelarasan Tabel Kompak & Filter */
@@ -183,9 +185,12 @@ $stats = mysqli_fetch_assoc(mysqli_query($link, "SELECT COUNT(*) AS total, SUM(s
                                     <a href="mata_kuliah_ubah.php?kodemk=<?= urlencode($row['kodemk']); ?>" class="btn-action btn-edit" style="padding: 5px 10px; font-size: 0.8rem;">
                                         Ubah
                                     </a>
+                                    
                                     <a href="mata_kuliah_hapus.php?kodemk=<?= urlencode($row['kodemk']); ?>" 
-                                       onclick="return confirm('Yakin ingin menghapus mata kuliah <?= htmlspecialchars($row['namamk']); ?>?')" 
-                                       class="btn-action btn-delete" style="padding: 5px 10px; font-size: 0.8rem;">
+                                       data-id="<?= htmlspecialchars($row['kodemk']); ?>"
+                                       data-name="<?= htmlspecialchars($row['namamk']); ?>"
+                                       class="btn-action btn-delete btn-hapus-matkul" 
+                                       style="padding: 5px 10px; font-size: 0.8rem;">
                                         Hapus
                                     </a>
                                 </td>
@@ -212,6 +217,40 @@ $stats = mysqli_fetch_assoc(mysqli_query($link, "SELECT COUNT(*) AS total, SUM(s
     <footer class="footer-site">
         <?php include "../layouts/bawah.php"; ?>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tombolHapus = document.querySelectorAll('.btn-hapus-matkul');
+            
+            tombolHapus.forEach(tombol => {
+                tombol.addEventListener('click', function (event) {
+                    // Blokir aksi redirect langsung bawaan tag <a>
+                    event.preventDefault();
+                    
+                    const urlTarget = this.getAttribute('href');
+                    const kodeMk = this.getAttribute('data-id');
+                    const namaMk = this.getAttribute('data-name');
+                    
+                    Swal.fire({
+                        title: 'Hapus Mata Kuliah?',
+                        text: `Anda yakin ingin menghapus (${kodeMk}) ${namaMk}? Data yang terhapus tidak dapat dikembalikan.`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#64748b',
+                        confirmButtonText: 'Ya, Hapus!',
+                        cancelButtonText: 'Batal',
+                        reverseButtons: true
+                    }).then((result) => {
+                        // Jika divalidasi oleh user, jalankan redirect menuju skrip php eksekutor
+                        if (result.isConfirmed) {
+                            window.location.href = urlTarget;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
